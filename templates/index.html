@@ -13,7 +13,9 @@
 <h2>Input a band or artist into the search bar.</h2>
 <form action="{% url 'results' %}" method="get">
     <label>
-        <input type="text" name="search" placeholder="Search for band/artist" pattern="[a-zA-Z0-9\s.]+" value="{{request.GET.title}}" required minlength="1" maxlength = "25" oninvalid="this.setCustomValidity('Need an artist')" oninput="this.setCustomValidity('')"/>
+        <! –– There is some error checking here to ensure a minimum of 1 character, a max of 25, and a limit on what characters are input -->
+        <input type="text" name="search" placeholder="Search for band/artist" pattern="[a-zA-Z0-9\s.]+" value="{{request.GET.title}}" required minlength="1" maxlength = "25" oninvalid="this.setCustomValidity('Need an artist or album')" oninput="this.setCustomValidity('')"/>
+        <! –– Two options below for the user to search by Album or Artist -->
         <button type="submit" name="searchType" value="artist"> Search Artists</button>
         <button type="submit" name="searchType" value="album"> Search Albums </button>
     </label>

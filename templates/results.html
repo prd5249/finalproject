@@ -11,7 +11,9 @@
 </head>
 <body>
 <h1>Results!</h1>
+<! –– This button allows the user to go back to the main search page so they can try another query -->
 <button onclick="history.back()">Go Back</button>
+<! –– I'm putting the results in a table for readability -->
 <table>
     <tr>
         <th>Album Name</th>
@@ -19,11 +21,13 @@
         <th>Album Release Date</th>
         <th>Album Art</th>
     </tr>
+    <! –– Loop through the results received from the python and use them to write the page -->
     {% for album, artist, release, art in results %}
     <tr>
         <td>{{ album }}</td>
         <td>{{ artist }}</td>
         <td>{{ release }}</td>
+        <! –– The size of the album image is limited or else the page is unreadable -->
         <td><img src="{{ art }}" width="75" height="75"></td>
     </tr>
     {% endfor %}

@@ -18,6 +18,11 @@ from django.contrib import admin
 from django.urls import path
 from spotifyProj import views
 
+""" 
+Default pattern is to go to the index page
+The admin urlpattern is created when making a Django app in Pycharm, this was never used
+The main page for the app is the results page
+"""
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),

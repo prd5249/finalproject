@@ -20,7 +20,7 @@ def results(request):
     spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id=os.environ["SPOTIPY_CLIENT_ID"],
                                                                                   client_secret=os.environ["SPOTIPY_CLIENT_SECRET"]))
     # We've built the search command to use, and now we check with Spotify
-    # I'm trying to limit the results so there is less to check
+    # I'm trying to limit the results so there is less to parse
     topresults = spotify.search(search_query, limit=10, offset=0, type='album', market=None)
     # The JSON object returns a lot of information, but I'm only looking for the top 10 album results
     shortresults = topresults['albums']['items']
@@ -34,7 +34,7 @@ def results(request):
     artistNameList = []
     releaseDateList = []
     albumArt = []
-    # There are only 10 results, so going through each of them
+    # There are only 10 results, so looping through each of them
     for result in shortresults:
         albumNameList.append(result['name'])
         # We pull the 1st artist (or 0th, really) and store that, THEN check for additional artists
@@ -49,7 +49,7 @@ def results(request):
         albumArt.append(result['images'][0]['url'])
 
     # After everything for this result is identified, create a zip object for easily navigating on the html page
-    results = zip(albumNameList, artistNameList, releaseDateList, albumArt)
-    context = { 'results' : results }
+    searchResults = zip(albumNameList, artistNameList, releaseDateList, albumArt)
+    context = { 'results' : searchResults }
     # Create the webpage, passing in the results we've accumulated
     return render(request, "results.html", context)

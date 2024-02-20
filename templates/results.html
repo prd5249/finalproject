@@ -11,6 +11,7 @@
 </head>
 <body>
 <h1>Results!</h1>
+<h2><a href="{{ playlistLink }}"> Click here to check out a playlist based on this search!</a></h2>
 <! –– This button allows the user to go back to the main search page so they can try another query -->
 <button onclick="history.back()">Go Back</button>
 <! –– I'm putting the results in a table for readability -->
@@ -31,6 +32,7 @@
         <td><img src="{{ art }}" width="75" height="75"></td>
     </tr>
     {% endfor %}
+
 </table>
 </body>
 </html>

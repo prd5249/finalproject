@@ -22,6 +22,8 @@ def results(request):
     # We've built the search command to use, and now we check with Spotify
     # I'm trying to limit the results so there is less to parse
     topresults = spotify.search(search_query, limit=10, offset=0, type='album', market=None)
+    playlistResults = spotify.search(search_query, limit=10, offset=0, type='playlist', market=None)
+    playlistLink = playlistResults['playlists']['items'][0]['external_urls']['spotify']
     # The JSON object returns a lot of information, but I'm only looking for the top 10 album results
     shortresults = topresults['albums']['items']
     # If there are NO RESULTS, I need to show an error page, so I redirect the user to a specific view for that
@@ -50,6 +52,6 @@ def results(request):
 
     # After everything for this result is identified, create a zip object for easily navigating on the html page
     searchResults = zip(albumNameList, artistNameList, releaseDateList, albumArt)
-    context = { 'results' : searchResults }
+    context = { 'results' : searchResults, 'playlistLink' : playlistLink }
     # Create the webpage, passing in the results we've accumulated
     return render(request, "results.html", context)

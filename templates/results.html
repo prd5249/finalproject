@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spotify Results</title>
+    <style>
+        table, th, td {
+  border: 1px solid black;
+}
+    </style>
+</head>
+<body>
+<h1>Results!</h1>
+<button onclick="history.back()">Go Back</button>
+<table>
+    <tr>
+        <th>Album Name</th>
+        <th>Album Artist</th>
+        <th>Album Release Date</th>
+        <th>Album Art</th>
+    </tr>
+    {% for album, artist, release, art in results %}
+    <tr>
+        <td>{{ album }}</td>
+        <td>{{ artist }}</td>
+        <td>{{ release }}</td>
+        <td><img src="{{ art }}" width="75" height="75"></td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

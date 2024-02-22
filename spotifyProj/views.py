@@ -4,7 +4,7 @@ from django.shortcuts import render
 import spotipy
 # The Client Credentials allows me to 'seed' this configuration with two
 # parameters required for using the spotify app, the Client ID & Secret
-from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.oauth2 import SpotifyClientCredentials, SpotifyOauthError
 # Needed to grab environment variables
 import os
 
@@ -19,8 +19,10 @@ def results(request):
     search_query = request.GET.get('searchType') + ':' + request.GET.get('search')
     spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id=os.environ["SPOTIPY_CLIENT_ID"],
                                                                                   client_secret=os.environ["SPOTIPY_CLIENT_SECRET"]))
+
     # We've built the search command to use, and now we check with Spotify
     # I'm trying to limit the results so there is less to parse
+
     topresults = spotify.search(search_query, limit=10, offset=0, type='album', market=None)
     playlistResults = spotify.search(search_query, limit=10, offset=0, type='playlist', market=None)
     playlistLink = playlistResults['playlists']['items'][0]['external_urls']['spotify']
